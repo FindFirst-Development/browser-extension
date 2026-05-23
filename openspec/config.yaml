@@ -1,0 +1,10 @@
+schema: spec-driven
+
+context: |
+  Project: FindFirst browser extensions (Chrome + Firefox)
+  Structure: monorepo with chrome-extension/ and firefox-extension/ directories
+  Languages: TypeScript, JSON (manifests)
+  Targets: Chrome (Manifest V3), Firefox (WebExtensions API)
+
+  Both extensions share the same core functionality but are maintained separately
+  to accommodate browser-specific APIs and manifest differences.
