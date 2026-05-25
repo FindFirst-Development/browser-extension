@@ -15,8 +15,7 @@
     }
   },
   "background": {
-    "service_worker": "background/service-worker.js",
-    "type": "module"
+    "scripts": ["background/service-worker.js"]
   },
   "options_ui": {
     "page": "options/options.html",
@@ -25,11 +24,12 @@
   "permissions": [
     "activeTab",
     "storage",
+    "cookies",
     "contextMenus",
     "notifications"
   ],
   "host_permissions": [
-    "http://localhost:8080/*"
+    "http://localhost:9000/*"
   ],
   "browser_specific_settings": {
     "gecko": {

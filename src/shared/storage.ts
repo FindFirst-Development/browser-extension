@@ -4,7 +4,7 @@ export interface AuthState {
   username: string | null;
 }
 
-const DEFAULT_SERVER_URL = "http://localhost:8080";
+const DEFAULT_SERVER_URL = "http://localhost:9000";
 
 export async function getAuthState(): Promise<AuthState> {
   const result = await browser.storage.local.get([
@@ -24,7 +24,16 @@ export async function setAuthenticated(username: string): Promise<void> {
 }
 
 export async function clearAuth(): Promise<void> {
-  await browser.storage.local.remove(["isAuthenticated", "username"]);
+  await browser.storage.local.remove(["isAuthenticated", "username", "jwtToken"]);
+}
+
+export async function getJwtToken(): Promise<string | null> {
+  const result = await browser.storage.local.get("jwtToken");
+  return (result["jwtToken"] as string) ?? null;
+}
+
+export async function setJwtToken(token: string): Promise<void> {
+  await browser.storage.local.set({ jwtToken: token });
 }
 
 export async function setServerUrl(url: string): Promise<void> {

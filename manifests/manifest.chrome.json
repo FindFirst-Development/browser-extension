@@ -25,10 +25,11 @@
   "permissions": [
     "activeTab",
     "storage",
+    "cookies",
     "contextMenus",
     "notifications"
   ],
   "host_permissions": [
-    "http://localhost:8080/*"
+    "http://localhost:9000/*"
   ]
 }
