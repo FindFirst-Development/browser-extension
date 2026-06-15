@@ -73,8 +73,8 @@ async function handleMessage(message: Message): Promise<unknown> {
   switch (message.type) {
     case "SIGN_IN": {
       try {
-        await signin(message.username, message.password);
-        await setAuthenticated(message.username);
+        const accessToken = await signin(message.username, message.password);
+        await setAuthenticated(message.username, accessToken);
         return { ok: true, username: message.username } satisfies SignInResponse;
       } catch {
         return { ok: false, error: "Invalid credentials" } satisfies SignInResponse;

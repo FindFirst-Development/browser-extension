@@ -24,12 +24,12 @@
   "permissions": [
     "activeTab",
     "storage",
-    "cookies",
     "contextMenus",
     "notifications"
   ],
   "host_permissions": [
-    "http://localhost:9000/*"
+    "http://localhost:9000/*",
+    "https://findfirst.dev/*"
   ],
   "browser_specific_settings": {
     "gecko": {

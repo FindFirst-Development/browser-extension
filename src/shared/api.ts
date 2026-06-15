@@ -1,4 +1,4 @@
-import { clearAuth, getJwtToken, getServerUrl, setJwtToken } from "./storage.js";
+import { clearAuth, getAccessToken, getServerUrl } from "./storage.js";
 
 export class SessionExpiredError extends Error {
   constructor() {
@@ -23,11 +23,11 @@ async function fetchWithAuth(
   input: string,
   init?: RequestInit
 ): Promise<Response> {
-  const token = await getJwtToken();
-  const headers: Record<string, string> = {
-    ...(init?.headers as Record<string, string> ?? {}),
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  };
+  const token = await getAccessToken();
+  const headers = new Headers(init?.headers);
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
   const response = await fetch(input, { ...init, headers });
   if (response.status === 401) {
     await clearAuth();
@@ -36,23 +36,25 @@ async function fetchWithAuth(
   return response;
 }
 
-export async function signin(username: string, password: string): Promise<void> {
+export async function signin(
+  username: string,
+  password: string
+): Promise<string> {
   const serverUrl = await getServerUrl();
   const credentials = btoa(`${username}:${password}`);
   const response = await fetch(`${serverUrl}/user/signin`, {
     method: "POST",
-    credentials: "include",
     headers: { Authorization: `Basic ${credentials}` },
   });
   if (!response.ok) {
     throw new Error(`signin failed: ${response.status}`);
   }
-  // Cookies from cross-origin extension fetches aren't reliably sent in Chrome.
-  // Read the JWT via the cookies API and store it for explicit Bearer auth.
-  const cookie = await browser.cookies.get({ url: serverUrl, name: "findfirst" });
-  if (cookie) {
-    await setJwtToken(cookie.value);
+  const body = (await response.json()) as { accessToken?: string };
+  const accessToken = body.accessToken;
+  if (!accessToken) {
+    throw new Error("signin response missing accessToken");
   }
+  return accessToken;
 }
 
 export async function saveBookmark(
