@@ -66,7 +66,9 @@ export async function saveBookmark(
   const response = await fetchWithAuth(`${serverUrl}/api/bookmark`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url, title, tags }),
+    // TODO(r-sandor) we need add a toggle to the extension for scrapable.
+    // defaulting to to true.
+    body: JSON.stringify({ url, title, tags, scapable: true }),
   });
   if (!response.ok) {
     throw new Error(`saveBookmark failed: ${response.status}`);
