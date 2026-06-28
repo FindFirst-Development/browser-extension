@@ -68,7 +68,7 @@ export async function saveBookmark(
     headers: { "Content-Type": "application/json" },
     // TODO(r-sandor) we need add a toggle to the extension for scrapable.
     // defaulting to to true.
-    body: JSON.stringify({ url, title, tags, scapable: true }),
+    body: JSON.stringify({ url, title, tags, scrapable: true }),
   });
   if (!response.ok) {
     throw new Error(`saveBookmark failed: ${response.status}`);
