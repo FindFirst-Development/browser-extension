@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindFirst</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <span class="logo">FindFirst</span>
+      <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Open settings">&#9881;</button>
+    </header>
+
+    <!-- Sign-in view -->
+    <section id="view-signin" hidden>
+      <p id="signin-notice" class="notice" hidden></p>
+      <form id="form-signin" novalidate>
+        <label for="input-username">Username</label>
+        <input id="input-username" type="text" autocomplete="username" required />
+        <label for="input-password">Password</label>
+        <input id="input-password" type="password" autocomplete="current-password" required />
+        <p id="signin-error" class="error" hidden></p>
+        <button id="btn-signin" type="submit">Sign in</button>
+      </form>
+    </section>
+
+    <!-- Bookmark-save view -->
+    <section id="view-save" hidden>
+      <p id="no-bookmark-msg" class="notice" hidden>Cannot bookmark this page.</p>
+      <form id="form-save" novalidate>
+        <label for="input-title">Title</label>
+        <input id="input-title" type="text" required />
+        <label for="input-url">URL</label>
+        <input id="input-url" type="url" required />
+
+        <label>Tags</label>
+        <div id="tag-input-area" class="tag-input-area">
+          <div id="tag-chips" class="tag-chips"></div>
+          <input
+            id="input-tag"
+            type="text"
+            placeholder="Add tags…"
+            autocomplete="off"
+          />
+        </div>
+        <ul id="tag-suggestions" class="tag-suggestions" hidden></ul>
+
+        <p id="save-error" class="error" hidden></p>
+        <p id="save-success" class="success" hidden>Saved!</p>
+        <div class="row">
+          <button id="btn-save" type="submit">Save</button>
+          <button id="btn-signout" type="button" class="link-btn">Sign out</button>
+        </div>
+      </form>
+    </section>
+
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

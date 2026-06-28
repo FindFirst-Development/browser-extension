@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindFirst — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1>FindFirst Settings</h1>
+
+      <section class="card">
+        <h2>Server URL</h2>
+        <form id="form-server" novalidate>
+          <label for="input-server-url">FindFirst server base URL</label>
+          <input
+            id="input-server-url"
+            type="url"
+            placeholder="http://localhost:8080"
+            autocomplete="url"
+          />
+          <p id="url-error" class="error" hidden></p>
+          <p id="url-success" class="success" hidden></p>
+          <button type="submit">Save</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Connection Status</h2>
+        <div id="status-indicator" class="status">
+          <span id="status-dot" class="dot dot--checking"></span>
+          <span id="status-text">Checking…</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="options.js" type="module"></script>
+  </body>
+</html>

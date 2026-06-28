@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "FindFirst",
+  "version": "1.0.0",
+  "description": "Save pages and links to FindFirst",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
+  },
+  "background": {
+    "scripts": ["background/service-worker.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://localhost:9000/*",
+    "https://findfirst.dev/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "findfirst@findfirst.app",
+      "strict_min_version": "109.0"
+    }
+  }
+}
