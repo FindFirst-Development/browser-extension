@@ -45,6 +45,7 @@ export async function signin(
   const response = await fetch(`${serverUrl}/user/signin`, {
     method: "POST",
     headers: { Authorization: `Basic ${credentials}` },
+    credentials: "include",
   });
   if (!response.ok) {
     throw new Error(`signin failed: ${response.status}`);
