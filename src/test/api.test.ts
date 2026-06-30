@@ -8,7 +8,10 @@ afterEach(() => vi.restoreAllMocks());
 describe("signin", () => {
   it("calls POST /user/signin with Basic auth header", async () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(null, { status: 200 })
+      new Response(JSON.stringify({ accessToken: "test-token" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      })
     );
     await signin("alice", "password123");
     expect(fetchSpy).toHaveBeenCalledOnce();

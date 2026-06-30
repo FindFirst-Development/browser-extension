@@ -13,7 +13,7 @@ beforeEach(() => resetStorage());
 describe("getAuthState", () => {
   it("returns defaults when storage is empty", async () => {
     const state = await getAuthState();
-    expect(state.serverUrl).toBe("http://localhost:8080");
+    expect(state.serverUrl).toBe("http://localhost:9000");
     expect(state.isAuthenticated).toBe(false);
     expect(state.username).toBeNull();
   });
@@ -21,14 +21,14 @@ describe("getAuthState", () => {
 
 describe("setAuthenticated / clearAuth", () => {
   it("sets isAuthenticated and username", async () => {
-    await setAuthenticated("alice");
+    await setAuthenticated("alice", "token-abc");
     const state = await getAuthState();
     expect(state.isAuthenticated).toBe(true);
     expect(state.username).toBe("alice");
   });
 
   it("clearAuth removes isAuthenticated and username", async () => {
-    await setAuthenticated("alice");
+    await setAuthenticated("alice", "token-abc");
     await clearAuth();
     const state = await getAuthState();
     expect(state.isAuthenticated).toBe(false);
@@ -45,6 +45,6 @@ describe("setServerUrl / getServerUrl", () => {
 
   it("returns default when not set", async () => {
     const url = await getServerUrl();
-    expect(url).toBe("http://localhost:8080");
+    expect(url).toBe("http://localhost:9000");
   });
 });
